@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     name: database
-  name: postgres-josh
+  name: postgres-josh # POSTGRES_NAME
 spec:
   progressDeadlineSeconds: 2147483647
   replicas: 1
@@ -19,15 +19,15 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: jagar2/grade_database:latest
+          image: jagar2/grade_database:latest #POSTGRES_CONTAINER
           imagePullPolicy: Always
           resources:
             limits:
-              memory: 12Gi
-              cpu: 4
+              memory:  #POSTGRES_MEM_MAX
+              cpu: 4 #POSTGRES_CPU_MAX
             requests:
-              memory: 8Gi
-              cpu: 1
+              memory: 8Gi #POSGRES_MEM_MIN
+              cpu: 1 #POSTGRES_CPU_MIN
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-volume-mount
@@ -50,6 +50,6 @@ spec:
       volumes:
         - name: postgres-volume-mount
           persistentVolumeClaim:
-            claimName: postgres-pvc-josh
+            claimName: postgres-pvc-josh #POSTGRES_PVC
       imagePullSecrets:
         - name: regcred
