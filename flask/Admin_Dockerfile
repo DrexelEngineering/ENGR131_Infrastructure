@@ -1,0 +1,21 @@
+# base image
+FROM python:3.10-slim
+
+# install netcat
+RUN apt-get update && \
+    apt-get -y install netcat-traditional && \
+    apt-get clean
+
+# set working directory
+WORKDIR /usr
+
+# add app
+COPY . /usr
+
+RUN pip install -r /usr/src/requirements.txt
+
+# add entrypoint.sh
+RUN chmod +x /usr/admin_entrypoint.sh
+
+# run server
+CMD ["/usr/admin_entrypoint.sh"]
