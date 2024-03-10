@@ -21,8 +21,10 @@ export POSTGRES_CPU_MAX=4
 export POSTGRES_PVC="postgres-pvc-$course-$semester"
 export STORAGE_CLASS="rook-ceph-block"
 export POSTGRES_PVC_SIZE="25Gi"
+
+
 export ADMIN_SERVER_NAME="admin-$course-$semester-flask"
-export ADMIN_SERVER_REPLICAS=2
+export ADMIN_SERVER_REPLICAS=1
 export ADMIN_SERVER_CONTAINER="$dockeruser/admin_flask_server:2.0.5"
 export ADMIN_MEM_MIN="6Gi"
 export ADMIN_MEM_MAX="12Gi"
@@ -31,4 +33,16 @@ export ADMIN_CPU_MAX=4
 export ADMIN_FLASK_SERVICE_NAME="$ADMIN_SERVER_NAME-service"
 export ADMIN_FLASK_SERVICE_PORT=5100
 export ADMIN_FLASK_HOSTNAME="${course}-${semester}-admin-grader.${HOSTNAME}"
+
+
+export STUDENT_SERVER_NAME="student-$course-$semester-flask"
+export STUDENT_SERVER_REPLICAS=1
+export STUDENT_SERVER_CONTAINER="$dockeruser/student_flask_server:4.0.0"
+export STUDENT_MEM_MIN="8Gi"
+export STUDENT_MEM_MAX="16Gi"
+export STUDENT_CPU_MIN=8
+export STUDENT_CPU_MAX=16
+export STUDENT_FLASK_SERVICE_NAME="$STUDENT_SERVER_NAME-service"
+export STUDENT_FLASK_SERVICE_PORT=5200
+export STUDENT_FLASK_HOSTNAME="${course}-${semester}-STUDENT-grader.${HOSTNAME}"
 
