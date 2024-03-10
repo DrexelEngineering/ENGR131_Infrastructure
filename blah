@@ -1,0 +1,4 @@
+export ADMIN_MEM_MIN="8Gi"
+export ADMIN_MEM_MAX="12Gi"
+export ADMIN_CPU_MIN=4
+export ADMIN_CPU_MAX=1
