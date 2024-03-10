@@ -1,0 +1,29 @@
+CREATE DATABASE grades;
+
+-- create the student user with only write access
+CREATE ROLE student WITH LOGIN PASSWORD '${STUDENT_PASSWORD}';
+
+-- create the teaching assistant role with only read access
+CREATE ROLE teaching_assistant WITH LOGIN PASSWORD '${TEACHING_ASSISTANT_PASSWORD}';
+
+-- creates the faculty role with read and write access
+CREATE ROLE faculty WITH LOGIN PASSWORD '${FACULTY_PASSWORD}';
+
+-- create an admin account
+CREATE ROLE admin WITH LOGIN PASSWORD '${ADMIN_PASSWORD}';
+
+-- Grants superuser access to the admin account
+ALTER ROLE admin WITH SUPERUSER;
+
+\c grades
+
+GRANT INSERT on ALL TABLES IN SCHEMA public TO student;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT ON TABLES TO student;
+
+GRANT SELECT on ALL TABLES IN SCHEMA public TO teaching_assistant;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO teaching_assistant;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO faculty;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO faculty;
+
+

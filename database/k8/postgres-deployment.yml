@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    name: database
+  name: postgres-josh
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  selector:
+    matchLabels:
+      service: postgres
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: jagar2/grade_database:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 12Gi
+              cpu: 4
+            requests:
+              memory: 8Gi
+              cpu: 1
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-volume-mount
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pvc-josh
+      imagePullSecrets:
+        - name: regcred

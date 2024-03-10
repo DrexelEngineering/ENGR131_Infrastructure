@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: student-ingress
+spec:
+  rules:
+    - host: engr131-student-grader.nrp-nautilus.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: student-flask-service
+                port:
+                  number: 5200
+          - path: /logout
+            pathType: Prefix
+            backend:
+              service:
+                name: student-flask-service
+                port:
+                  number: 5200
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: student-flask-service
+                port:
+                  number: 5200
+          - path: /upload_score
+            pathType: Prefix
+            backend:
+              service:
+                name: student-flask-service
+                port:
+                  number: 5200
+          - path: /live_scorer
+            pathType: Prefix
+            backend:
+              service:
+                name: student-flask-service
+                port:
+                  number: 5200
+  tls:
+    - hosts:
+        - engr131-student-grader.nrp-nautilus.io

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-flask-service
+  labels:
+    service: admin-flask-service
+spec:
+  selector:
+    app: adminflask
+  ports:
+    - port: 5100
+      protocol: TCP
+      targetPort: 5100
