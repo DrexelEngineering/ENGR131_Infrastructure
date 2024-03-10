@@ -18,3 +18,5 @@ export POSTGRES_MEM_MAX="12Gi"
 export POSTGRES_CPU_MIN=4
 export POSTGRES_CPU_MAX=1
 export POSTGRES_PVC="postgres-pvc-$course-$semester"
+export STORAGE_CLASS="rook-ceph-block"
+export POSTGRES_PVC_SIZE="25Gi"

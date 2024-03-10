@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pvc-josh
+  name: postgres-pvc-josh # POSTGRES_PVC
   labels:
     type: local
 spec:
@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 25Gi
-  storageClassName: rook-ceph-block
+      storage: 25Gi # POSTGRES_PVC_SIZE
+  storageClassName: rook-ceph-block #STORAGE_CLASS
