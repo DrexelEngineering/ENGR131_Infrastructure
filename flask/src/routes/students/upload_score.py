@@ -62,7 +62,7 @@ def upload_score_():
     
     # Check if the request has the file part
     if 'log_file' in request.files:
-        log_info = drexel_jupyter_logger.decode_log_file(self.filepath, key=key)
+        log_info = drexel_jupyter_logger.decode_log_file(request.files['log_file'], key=key)
     else: 
         log_info = "None"
 
