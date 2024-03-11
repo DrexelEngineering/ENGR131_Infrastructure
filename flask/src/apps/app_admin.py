@@ -51,25 +51,25 @@ def initialize_database():
     cursor = conn.cursor()
     
     
-    # builds the student table
-    Students_ = student_database()
-    cursor.execute(Students_)
+    # # builds the student table
+    # Students_ = student_database()
+    # cursor.execute(Students_)
     
-    # builds the assignment table
-    assignment_ = assignment_table()
-    cursor.execute(assignment_)
+    # # builds the assignment table
+    # assignment_ = assignment_table()
+    # cursor.execute(assignment_)
     
-    # builds the question table
-    question_ = question_table()
-    cursor.execute(question_)
+    # # builds the question table
+    # question_ = question_table()
+    # cursor.execute(question_)
     
-    # builds the submission table
-    submission_ = submission_table()
-    cursor.execute(submission_)
+    # # builds the submission table
+    # submission_ = submission_table()
+    # cursor.execute(submission_)
     
-    # builds the question score table
-    question_score_ = question_score()
-    cursor.execute(question_score_)
+    # # builds the question score table
+    # question_score_ = question_score()
+    # cursor.execute(question_score_)
     
     cursor.execute("GRANT INSERT on ALL TABLES IN SCHEMA public TO student")
     conn.commit()
