@@ -108,7 +108,7 @@ def upload_score_():
                     "percentage_score": percentage_score,
                     "original_file_name": original_file_name,
                     "submission_mechanism": submission_mechanism,
-                    "log_info": log_info,
+                    "logfile": log_info,
                 }]
         
         if 'start_time' in request.form:
