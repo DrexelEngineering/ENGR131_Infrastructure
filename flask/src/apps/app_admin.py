@@ -49,6 +49,7 @@ def load_user(user_id):
 def initialize_database():
     conn = admin_login(password)
     cursor = conn.cursor()
+    
     cursor.execute("GRANT INSERT on ALL TABLES IN SCHEMA public TO student")
     conn.commit()
     conn.close()
