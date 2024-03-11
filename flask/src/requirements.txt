@@ -31,5 +31,5 @@ urllib3==2.1.0
 werkzeug==3.0.1
 gunicorn==20.1.0
 openpyxl==3.0.9
-
+drexel_jupyter_logger
 xlrd==2.0.1
