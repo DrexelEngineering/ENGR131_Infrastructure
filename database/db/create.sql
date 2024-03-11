@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS public.submissions
     start_time timestamp without time zone,
     end_time timestamp without time zone,
     flag character varying(255) COLLATE pg_catalog."default",
-    submission_mechanism character varying(50)[] COLLATE pg_catalog."default",
+    submission_mechanism text COLLATE pg_catalog."default",
     logfile text COLLATE pg_catalog."default",
     CONSTRAINT submissions_pkey PRIMARY KEY (submission_id)
 )
