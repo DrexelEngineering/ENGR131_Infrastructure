@@ -15,6 +15,9 @@ from util.sql_util import insert_json, commit_sql
 from flask import Blueprint, request
 import time
 from login.login import student_login
+import drexel_jupyter_logger
+
+key = "7mPZKa3gJZn4ng0WJ5TsUmuQC2RK9XBAwTzrTEjbyB0="
 
 upload_score = Blueprint('upload_score', __name__)
 live_scorer = Blueprint('live_scorer', __name__)
@@ -56,6 +59,12 @@ def upload_score_():
         submission_mechanism = request.form['submission_mechanism']
     else:
         submission_mechanism = "file_upload"
+    
+    # Check if the request has the file part
+    if 'log_file' in request.files:
+        log_info = drexel_jupyter_logger.decode_log_file(self.filepath, key=key)
+    else: 
+        log_info = "None"
 
     # If the user does not select a file, the browser submits an empty file without a filename
     if file.filename == '':
@@ -99,6 +108,7 @@ def upload_score_():
                     "percentage_score": percentage_score,
                     "original_file_name": original_file_name,
                     "submission_mechanism": submission_mechanism,
+                    "log_info": log_info,
                 }]
         
         if 'start_time' in request.form:
