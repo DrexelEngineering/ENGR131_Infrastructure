@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submissions Table</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Submissions</h1>
+    <div>
+        <label for="filter">Filter by Student ID:</label>
+        <input type="text" id="filter" oninput="filterSubmissions()" placeholder="Enter Student ID">
+    </div>
+    <table id="submissionsTable">
+        <thead>
+            <tr>
+                <th>Submission ID</th>
+                <th>Original File Name</th>
+                <th>Student ID</th>
+                <th>Assignment ID</th>
+                <th>Submitter Type</th>
+                <th>Total Score</th>
+                <th>Max Score</th>
+                <th>Percentage Score</th>
+                <th>Submission Time</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Flag</th>
+                <th>Submission Mechanism</th>
+                <th>Logfile</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Table rows will be inserted here dynamically -->
+        </tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
