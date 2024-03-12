@@ -61,8 +61,8 @@ def upload_score_():
         submission_mechanism = "file_upload"
     
     # Check if the request has the file part
-    if 'log_file' in request.files:
-        log_info = drexel_jupyter_logger.decode_log_file(request.files['log_file'], key=key)
+    if 'log_file' in request.form:
+        log_info = request.form['log_file']
     else: 
         log_info = "None"
 
