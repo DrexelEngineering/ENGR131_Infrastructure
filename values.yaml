@@ -26,7 +26,7 @@ hub:
       accessModes:
         - ReadWriteOnce
       storage: 1Gi
-      storageClassName: rook-ceph-block
+      storageClassName: rook-ceph-east
   resources:
     limits:
       cpu: 3
@@ -53,14 +53,14 @@ singleuser:
     securityContext:
       fsGroupChangePolicy: "OnRootMismatch"
       fsGroup: 100
-  extraNodeAffinity:
-    required:
-      - matchExpressions:
-          - key: "topology.kubernetes.io/region"
-            operator: "In"
-            values: ["us-west"]
-          - key: "nautilus.io/linstor" # Add this line
-            operator: "Exists"
+  # extraNodeAffinity:
+  #   # required:
+  #   #   - matchExpressions:
+  #   #       # - key: "topology.kubernetes.io/region"
+  #   #       #   operator: "In"
+  #   #       #   values: ["us-east"]
+  #   #       - key: "nautilus.io/linstor" # Add this line
+  #   #         operator: "Exists"
   cloudMetadata:
     blockWithIptables: false
   networkPolicy:
@@ -73,7 +73,7 @@ singleuser:
     capacity: 0.5Gi
     homeMountPath: /home/jovyan
     dynamic:
-      storageClass: linstor-sdsu
+      storageClass: rook-ceph-east
       pvcNameTemplate: claim-{username}{servername}
       volumeNameTemplate: volume-{username}{servername}
       storageAccessModes: [ReadWriteOnce]
