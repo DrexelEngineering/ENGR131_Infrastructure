@@ -9,9 +9,9 @@ hub:
         - "jca318"
       authenticator_class: "oauthenticator.globus.GlobusOAuthenticator" # Corrected class name
     GlobusOAuthenticator:
-      client_id: "f9d2091b-f092-4fb9-afaa-afc191723a5a" # Your Globus client ID
-      client_secret: "FLW2CT7Q0SU/Etk7S2iEX9bzpl1ZgJ4N/gLysMs6EgE=" # Your Globus client secret
-      oauth_callback_url: "https://engr131-1exam.nrp-nautilus.io/hub/oauth_callback" # Ensure this matches the callback URL registered in Globus
+      client_id: "e34feab7-6074-4b9d-8122-b75ae6757e4d" # Your Globus client ID
+      client_secret: "VsH4/qz0Vm+4pENMFP3j6EeyHgi4s1RPQNR7Mrp4Pxg=" # Your Globus client secret
+      oauth_callback_url: "https://engr131-spring2024.nrp-nautilus.io/hub/oauth_callback" # Ensure this matches the callback URL registered in Globus
   service:
     type: ClusterIP
     annotations: {}
@@ -29,11 +29,11 @@ hub:
       storageClassName: rook-ceph-block
   resources:
     limits:
-      cpu: "2"
-      memory: 1Gi
+      cpu: 3
+      memory: 3Gi
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 1
+      memory: 1Mi
   networkPolicy:
     enabled: false
 proxy:
@@ -104,7 +104,7 @@ scheduling:
     enabled: false
   userPlaceholder:
     enabled: true
-    replicas: 5
+    replicas: 2
 
 # prePuller relates to the hook|continuous-image-puller DaemonsSets
 prePuller:
@@ -117,11 +117,11 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: haproxy
-  hosts: ["engr131-1exam.nrp-nautilus.io"]
+  hosts: ["engr131-spring2024.nrp-nautilus.io"]
   pathSuffix: ""
   tls:
     - hosts:
-        - engr131-1exam.nrp-nautilus.io
+        - engr131-spring2024.nrp-nautilus.io
 
 cull:
   enabled: true

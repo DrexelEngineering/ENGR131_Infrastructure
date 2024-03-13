@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              memory:  #POSTGRES_MEM_MAX
+              memory: 16Gi #POSTGRES_MEM_MAX
               cpu: 4 #POSTGRES_CPU_MAX
             requests:
               memory: 8Gi #POSGRES_MEM_MIN

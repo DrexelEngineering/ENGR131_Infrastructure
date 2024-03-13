@@ -41,3 +41,10 @@ Globus auth allows you to use trusted authentication and authorization to access
     ```bash
     export OAUTH_CLIENT_SECRET="<your oauth secret>"
     ```
+
+
+
+helm repo add engr131-spring2024 https://jupyterhub.github.io/helm-chart/ && helm repo update &&
+helm upgrade --cleanup-on-fail --install jhub engr131-spring2024/jupyterhub --namespace engr131spring --version=2.0.0 --values ./values.yaml
+
+helm uninstall jhub --namespace engr131spring
