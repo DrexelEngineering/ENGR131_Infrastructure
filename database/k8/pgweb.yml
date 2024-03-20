@@ -1,0 +1,30 @@
+releases:
+  - name: pgweb
+    chart: ectobit/pgweb
+    namespace: engr131
+    values:
+      service:
+        type: ClusterIP
+        port: 80
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+        hosts:
+          - host: engr131-pgweb.nrp-nautilus.io
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - engr131-pgweb.nrp-nautilus.io
+      specs:
+        containers:
+          resources:
+            limits:
+              cpu: "2"
+              memory: "2Mi"
+            requests:
+              cpu: "1"
+              memory: "500Mi"
+

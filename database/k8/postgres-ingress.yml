@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: pg-ingress
+spec:
+  rules:
+    - host: engr131-pg.nrp-nautilus.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgres # Corrected to the actual service name
+                port:
+                  number: 5432
+  tls:
+    - hosts:
+        - engr131-pg.nrp-nautilus.io

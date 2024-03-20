@@ -48,3 +48,10 @@ helm repo add engr131-spring2024 https://jupyterhub.github.io/helm-chart/ && hel
 helm upgrade --cleanup-on-fail --install jhub engr131-spring2024/jupyterhub --namespace engr131spring --version=2.0.0 --values ./values.yaml
 
 helm uninstall jhub --namespace engr131spring
+
+helm repo add ectobit https://charts.ectobit.com && helm repo update &&
+helm install pgweb ectobit/pgweb --namespace engr131 --values ./database/k8/pgweb.yml
+
+helm uninstall pgweb --namespace engr131
+
+kubectl create -f database/k8/pgwebv2.yml -n engr131

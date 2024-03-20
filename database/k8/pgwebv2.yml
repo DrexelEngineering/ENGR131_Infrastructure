@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pgweb
+  name: pgweb
+spec:
+  containers:
+    - image: sosedoff/pgweb
+      name: pgweb
+      args: [
+          "--bind=0.0.0.0",
+          "--listen=8081",
+          "--auth-user=engr131",
+          "--auth-pass=CappsAgar",
+        ] # Corrected the syntax for the command line arguments
+      ports:
+        - containerPort: 8081
+      env: # Corrected the placement and syntax for environment variables
+        - name: PGWEB # Example environment variable name
+          value: "pgweb" # Example environment variable value
+        # - name: PGWEB_BASIC_AUTH_USER
+        #   value: "engr131"
+        # - name: PGWEB_BASIC_AUTH_PASS
+        #   value: "CappsAgar"
+      resources:
+        limits:
+          memory: "16Gi"
+          cpu: "16"
+        requests:
+          memory: "8Gi"
+          cpu: "8"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgweb-svc
+  labels:
+    service: pgweb-svc
+spec:
+  selector:
+    run: pgweb # This selector must match the label on the Pod
+  type: ClusterIP
+  ports:
+    - port: 8081 # The port the service is exposed on
+      targetPort: 8081 # The port the container is listening on
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: pgweb-ingress
+spec:
+  rules:
+    - host: engr131-pgweb.nrp-nautilus.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pgweb-svc # Corrected to the actual service name
+                port:
+                  number: 8081
+  tls:
+    - hosts:
+        - engr131-pgweb.nrp-nautilus.io

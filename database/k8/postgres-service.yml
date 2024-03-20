@@ -9,4 +9,5 @@ spec:
     service: postgres
   type: ClusterIP
   ports:
-  - port: 5432  #POSTGRES_PORT
+    - port: 5432 #POSTGRES_PORT
+      targetPort: 5432 # The port the container is listening on
