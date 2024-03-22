@@ -2,7 +2,10 @@
 
 ## Build Docker Image
 
+
+
 ```bash
+envtag="2.0.0"
 tagname=$envtag
 docker build -t $dockeruser/$envcontainer:$envtag . &&
 docker push $dockeruser/$envcontainer:$envtag &&

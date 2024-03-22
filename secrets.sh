@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export envtag="1.0.0"
+export envtag="2.0.0"
 export course="engr131"
 export semester="spring2024"
 export dockeruser="jagar2"
