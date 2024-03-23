@@ -1,8 +1,14 @@
 import os
 import sys
 import re
-
+from file_translators.assignment_reader import assignment_JSON
+from flask_login import login_required
+from util.sql_util import upsert_json, commit_sql
+from flask import Blueprint, request
+import time
+from login.login import admin_login
 from datetime import datetime, timezone, timedelta
+from ...util.string_util import is_string_number_combo, extract_string_number
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)
@@ -10,24 +16,28 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from file_translators.assignment_reader import assignment_JSON
-from flask_login import login_required
-from util.sql_util import upsert_json, commit_sql
-from flask import Blueprint, request
-import time
-from login.login import admin_login
-
 upload_score = Blueprint('upload_score', __name__)
 
 @upload_score.route('/upload_score', methods=['POST'])
 @login_required
 def upload_score_():
+    """Handles the upload of assignment scores.
+
+    This endpoint requires a POST request with form data including password, 
+    original_file_name, student_id, and assignment_id, along with the file containing the scores.
+    The file is parsed, and the scores are inserted into the database.
+
+    Returns:
+        str: Response message indicating success or failure, along with the appropriate HTTP status code.
+    """
+    
     
     # Check for assignmentName in the form data
     if 'password' not in request.form:
         return 'password is required', 400
     password = request.form['password']
     
+    # Establish a database connection as an admin
     conn = admin_login(password)
     cursor = conn.cursor()
     
@@ -83,8 +93,10 @@ def upload_score_():
         total_score = sum(float(d.get("score", 0)) for d in json_extracted)
         max_score = sum(float(d.get("max_score", 0)) for d in json_extracted)
         
+        # calculate the percentage score
         percentage_score = (total_score/max_score)*100
         
+        # Prepare the data for insertion into the 'submissions' table
         dict = [{   "submission_id": f"{student_id}_{assignment_id}_{formatted_date_time}",
                     "student_id": student_id,
                     "assignment_id": assignment_id,
@@ -101,6 +113,7 @@ def upload_score_():
         if 'end_time' in request.form:
             dict[0]["end_time"] = request.form['end_time']
         
+        # Insert or update submission record
         sql_call = upsert_json(dict, 'submissions', 'submission_id')        
         out = commit_sql(cursor, sql_call)
         if not out:
@@ -112,8 +125,10 @@ def upload_score_():
         
         dict = []
         
+        # Parsing each question from the JSON and preparing data for insertion
         for data in json_extracted:
         
+            # Build the dictionary for the question score
             dict.append({"submission_id": f"{student_id}_{assignment_id}_{formatted_date_time}",
                     "assignment_id": assignment_id,
                     "question_id": data.get('question_id'),
@@ -123,7 +138,8 @@ def upload_score_():
                     "output": data.get('output', 'NA'),
                     "visible": data.get('visibility', True)
                     })
-            
+        
+        # Insert or update question score records    
         sql_call = upsert_json(dict, 'question_score', ['submission_id', 'question_id'])        
         out = commit_sql(cursor, sql_call)
         if not out:
@@ -131,17 +147,10 @@ def upload_score_():
             conn.close()
             return "Error occurred during SQL execution", 500
         
+        # Commit the changes to the database
         conn.commit()
         # need to add the sql call here
         conn.close()
+        
+        # Return success message
         return "success"
-
-def is_string_number_combo(s):
-    pattern = r'^[A-Za-z]+_[0-9]+$'
-    return bool(re.match(pattern, s))
-
-def extract_string_number(s):
-    pattern = r'^([A-Za-z]+)_([0-9]+)$'
-    match = re.match(pattern, s)
-    if match:
-        return match.group(1), int(match.group(2))
