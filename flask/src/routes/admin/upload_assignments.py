@@ -1,6 +1,6 @@
 import os
 import sys
-import re
+from ...util.string_util import is_string_number_combo, extract_string_number
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)
@@ -101,12 +101,3 @@ def upload_students_():
         conn.close()
         return "success"
 
-def is_string_number_combo(s):
-    pattern = r'^[A-Za-z]+_[0-9]+$'
-    return bool(re.match(pattern, s))
-
-def extract_string_number(s):
-    pattern = r'^([A-Za-z]+)_([0-9]+)$'
-    match = re.match(pattern, s)
-    if match:
-        return match.group(1), int(match.group(2))
