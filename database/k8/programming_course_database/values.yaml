@@ -53,3 +53,21 @@ AdminFlask:
   # Port settings
   port:
     number: "5100" # Default service port
+
+StudentFlask:
+  host: "engr131-student-grader.nrp-nautilus.io"
+  port:
+    number: "5200"
+  replicaCount: 2
+  limits:
+    memory: "12Gi"
+    cpu: "4"
+  requests:
+    memory: "6Gi"
+    cpu: "2"
+
+data:
+  user: "c2FtcGxl" # base64 for "sample"
+  password: "cGxlYXNlY2hhbmdlbWU=" # base64 for "pleasechange"
+  student_pass: "Y2FwdHVyZQ==" # base64 for "capture"
+  admin_pass: "ZGlmZnVzZXI=" # base64 for "diffuser"
