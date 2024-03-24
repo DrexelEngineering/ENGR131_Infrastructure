@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
+  labels:
+    service: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
+spec:
+  selector:
+    app: adminflask-{{.Values.Course.name | default "class"}} #ADMIN_SERVER_NAME
+  ports:
+    - port: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+      protocol: TCP
+      targetPort: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
