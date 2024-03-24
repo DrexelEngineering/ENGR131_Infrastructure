@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: postgres-{{.Values.Course.name | default "class"}}-ingress
+spec:
+  rules:
+    - host: {{.Values.Postgres.host | default "engr131-pg.nrp-nautilus.io"}} 
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: postgres-{{.Values.Course.name | default "class"}}
+                port:
+                  number: {{.Values.Postgres.port.number | default 5432}}
+  tls:
+    - hosts:
+        - {{.Values.Postgres.host | default "engr131-pg.nrp-nautilus.io"}} 

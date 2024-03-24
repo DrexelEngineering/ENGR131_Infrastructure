@@ -10,26 +10,22 @@ spec:
       name: pgweb
       args: [
           "--bind=0.0.0.0",
-          "--listen=8081",
+          "--listen=8081", #PGWEB_PORT
           "--auth-user=engr131",
-          "--auth-pass=CappsAgar",
+          "--auth-pass=CappsAgar", #PGWEB_PASSWORD
         ] # Corrected the syntax for the command line arguments
       ports:
-        - containerPort: 8081
+        - containerPort: 8081 #PGWEB_PORT
       env: # Corrected the placement and syntax for environment variables
         - name: PGWEB # Example environment variable name
           value: "pgweb" # Example environment variable value
-        # - name: PGWEB_BASIC_AUTH_USER
-        #   value: "engr131"
-        # - name: PGWEB_BASIC_AUTH_PASS
-        #   value: "CappsAgar"
       resources:
         limits:
-          memory: "16Gi"
-          cpu: "16"
+          memory: "16Gi" #PGWEB_MEMORY_MAX
+          cpu: "1"
         requests:
           memory: "8Gi"
-          cpu: "8"
+          cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -53,7 +49,7 @@ metadata:
   name: pgweb-ingress
 spec:
   rules:
-    - host: engr131-pgweb.nrp-nautilus.io
+    - host: engr131-pgweb.nrp-nautilus.io 
       http:
         paths:
           - path: /

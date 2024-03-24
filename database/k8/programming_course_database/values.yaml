@@ -1,0 +1,48 @@
+# values.yaml
+
+# Course settings
+Course:
+  name: class # default course name
+
+# Postgres settings
+Postgres:
+  # Replica settings
+  replicaCount: 1 # default number of replicas
+  
+  # Image settings
+  image: "jagar2/grade_database:latest" # default Postgres image
+  
+  # Resource limits
+  limits:
+    memory: "12Gi" # maximum amount of memory the container can use
+    cpu: 4 # maximum number of CPU units the container can use
+  
+  # Resource requests
+  requests:
+    memory: "6Gi" # minimum amount of memory required for the container to run
+    cpu: 2 # minimum number of CPU units required for the container to run
+
+  # Host settings
+  host: "engr131-pg.nrp-nautilus.io" # Default host for the Ingress
+
+  # Port settings
+  port:
+    number: 5432 # Default service port
+
+# AdminFlask settings
+AdminFlask:
+  # Replica settings
+  replicaCount: 2 # Default number of replicas for the Admin Flask server
+  
+  # Image settings
+  image: "jagar2/admin_flask_server:2.0.5" # Default Docker image for the Admin Flask server
+  
+  # Resource limits
+  limits:
+    memory: "12Gi" # Maximum amount of memory the container can use
+    cpu: 4 # Maximum number of CPU units the container can use
+  
+  # Resource requests
+  requests:
+    memory: "6Gi" # Minimum amount of memory required for the container to run
+    cpu: 2 # Minimum number of CPU units required for the container to run

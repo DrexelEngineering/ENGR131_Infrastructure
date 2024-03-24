@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    name: database
+  name: postgres-{{.Values.Course.name | default "class"}} # POSTGRES_NAME
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: {{.Values.Postgres.replicaCount | default 1}}
+  selector:
+    matchLabels:
+      service: postgres
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: {{.Values.Postgres.image | default "jagar2/grade_database:latest"}}  #POSTGRES_CONTAINER
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: {{.Values.Postgres.limits.memory | default "12Gi"}}#ADMIN_MEM_MAX
+              cpu: {{.Values.Postgres.limits.cpu | default 4}} #ADMIN_CPU_MAX
+            requests:
+              memory: {{.Values.Postgres.requests.memory | default "6Gi"}} #ADMIN_MEM_MIN
+              cpu: {{.Values.Postgres.requests.cpu | default 2}} #ADMIN_CPU_MIN
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-volume-mount
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pvc-{{.Values.Course.name | default "class"}}
+      imagePullSecrets:
+        - name: regcred

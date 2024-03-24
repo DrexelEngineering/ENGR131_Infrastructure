@@ -46,3 +46,10 @@ export STUDENT_FLASK_SERVICE_NAME="$STUDENT_SERVER_NAME-service"
 export STUDENT_FLASK_SERVICE_PORT=5200
 export STUDENT_FLASK_HOSTNAME="${course}-${semester}-STUDENT-grader.${HOSTNAME}"
 
+export PGWEB_PASSWORD="--auth-pass=CappsAgar"
+export PGWEB_USER="--auth-user=engr131"
+export PGWEB_PORT=8081
+export PGWEB_MEM_MIN="6Gi"
+export PGWEB_MEM_MAX="12Gi"
+export PGWEB_CPU_MIN=2
+export PGWEB_CPU_MAX=4
