@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-flask-{{.Values.Course.name | default "class"}}-service
+  labels:
+    service: student-flask-{{.Values.Course.name | default "class"}}-service
+spec:
+  selector:
+    app: student-flask-{{.Values.Course.name | default "class"}}
+  ports:
+    - port: {{.Values.StudentFlask.port.number | default "5200"}}
+      protocol: TCP
+      targetPort: {{.Values.StudentFlask.port.number | default "5200"}}
+

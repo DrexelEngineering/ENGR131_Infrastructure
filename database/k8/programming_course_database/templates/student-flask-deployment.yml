@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    name: student-flask-{{.Values.Course.name | default "class"}}
+  name: student-flask-{{.Values.Course.name | default "class"}}
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: {{.Values.StudentFlask.replicaCount | default "2"}}
+  selector:
+    matchLabels:
+      app: student-flask-{{.Values.Course.name | default "class"}}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: student-flask-{{.Values.Course.name | default "class"}}
+    spec:
+      containers:
+        - env:
+            - name: FLASK_ENV
+              value: development
+            - name: APP_SETTINGS
+              value: project.config.DevelopmentConfig
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: postgres-credentials
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres-credentials
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: student_pass
+                  name: postgres-credentials
+          image:{{.Values.AdminFlask.image | default "jagar2/student_flask_server:4.0.0"}}
+          imagePullPolicy: Always
+          name: student-flask-{{.Values.Course.name | default "class"}}
+          resources:
+            limits:
+              memory: "{{.Values.StudentFlask.limits.memory | default "12Gi"}}" #ADMIN_MEM_MAX
+              cpu: "{{.Values.StudentFlask.limits.cpu | default "4"}}" #ADMIN_CPU_MAX
+            requests:
+              memory: "{{.Values.StudentFlask.requests.memory | default "6Gi"}}" #ADMIN_MEM_MIN
+              cpu: "{{.Values.StudentFlask.requests.cpu | default "2"}}" #ADMIN_CPU_MIN
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: regcred

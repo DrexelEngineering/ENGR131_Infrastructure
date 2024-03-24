@@ -53,4 +53,4 @@ spec:
                   number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
   tls:
     - hosts:
-        - engr131-admin-grader.nrp-nautilus.io #ADMIN_FLASK_HOSTNAME
+        - {{.Values.AdminFlask.host | default "engr131-admin-grader.nrp-nautilus.io"}}  #ADMIN_FLASK_HOSTNAME
