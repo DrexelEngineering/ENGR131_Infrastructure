@@ -15,7 +15,7 @@ spec:
               service:
                 name: postgres-{{.Values.Course.name | default "class"}}
                 port:
-                  number: {{.Values.Postgres.port.number | default 5432}}
+                  number: {{.Values.Postgres.port.number | default "5432"}}
   tls:
     - hosts:
         - {{.Values.Postgres.host | default "engr131-pg.nrp-nautilus.io"}} 

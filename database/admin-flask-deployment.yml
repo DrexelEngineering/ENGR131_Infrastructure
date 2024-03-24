@@ -7,7 +7,7 @@ metadata:
   name: adminflask #ADMIN_SERVER_NAME
 spec:
   progressDeadlineSeconds: 2147483647
-  replicas: {{.Values.AdminFlask.replicaCount | default 2}} #ADMIN_SERVER_REPLICAS
+  replicas: {{.Values.AdminFlask.replicaCount | default "2"}} #ADMIN_SERVER_REPLICAS
   selector:
     matchLabels:
       app: adminflask #ADMIN_SERVER_NAME
@@ -43,12 +43,11 @@ spec:
           name: adminflask
           resources:
             limits:
-              memory: {{.Values.AdminFlask.limits.memory | default "12Gi"}}#ADMIN_MEM_MAX
-              cpu: {{.Values.AdminFlask.limits.cpu | default 4}} #ADMIN_CPU_MAX
+              memory: "{{.Values.AdminFlask.limits.memory | default "12Gi"}}" #ADMIN_MEM_MAX
+              cpu: "{{.Values.AdminFlask.limits.cpu | default "4"}}" #ADMIN_CPU_MAX
             requests:
-              memory: {{.Values.AdminFlask.requests.memory | default "6Gi"}} #ADMIN_MEM_MIN
-              cpu: {{.Values.AdminFlask.requests.cpu | default 2}} #ADMIN_CPU_MIN
-          terminationMessagePath: /dev/termination-log
+              memory: "{{.Values.AdminFlask.requests.memory | default "6Gi"}}" #ADMIN_MEM_MIN
+              cpu: "{{.Values.AdminFlask.requests.cpu | default "2"}}" #ADMIN_CPU_MIN
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
