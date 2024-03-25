@@ -29,6 +29,10 @@ Postgres:
   port:
     number: "5432" # Default service port
 
+  storage: "5Gi"
+
+  storageClassName: "rook-ceph-block"
+
 # AdminFlask settings
 AdminFlask:
   # Replica settings
@@ -55,7 +59,7 @@ AdminFlask:
     number: "5100" # Default service port
 
 StudentFlask:
-  host: "engr131-student-grader.nrp-nautilus.io"
+  host: "engr131-student-grader-dev.nrp-nautilus.io"
   port:
     number: "5200"
   replicaCount: 2
@@ -65,9 +69,22 @@ StudentFlask:
   requests:
     memory: "6Gi"
     cpu: "2"
+  image: "jagar2/student_flask_server:latest"
 
 data:
   user: "c2FtcGxl" # base64 for "sample"
   password: "cGxlYXNlY2hhbmdlbWU=" # base64 for "pleasechange"
   student_pass: "Y2FwdHVyZQ==" # base64 for "capture"
   admin_pass: "ZGlmZnVzZXI=" # base64 for "diffuser"
+
+PGWeb:
+  port: 8081
+  user: "user"
+  password: "password"
+  host: "pgweb-dev.nrp-nautilus.io"
+  limits:
+    memory: "12Gi"
+    cpu: "2"
+  requests:
+    memory: "6Gi"
+    cpu: "1"

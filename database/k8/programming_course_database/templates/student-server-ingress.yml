@@ -46,4 +46,4 @@ spec:
                   number: {{.Values.StudentFlask.port.number | default "5200"}}
   tls:
     - hosts:
-        - {{.Values.StudentFlask.host | default "engr131-student-grader.nrp-nautilus.io"}} 
+        - {{.Values.StudentFlask.host | default "engr131-student-grader-dev.nrp-nautilus.io"}} 

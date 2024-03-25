@@ -38,16 +38,16 @@ spec:
                 secretKeyRef:
                   key: student_pass
                   name: postgres-credentials
-          image:{{.Values.AdminFlask.image | default "jagar2/student_flask_server:4.0.0"}}
+          image: {{.Values.StudentFlask.image | default "jagar2/student_flask_server:latest"}}
           imagePullPolicy: Always
           name: student-flask-{{.Values.Course.name | default "class"}}
           resources:
             limits:
-              memory: "{{.Values.StudentFlask.limits.memory | default "12Gi"}}" #ADMIN_MEM_MAX
-              cpu: "{{.Values.StudentFlask.limits.cpu | default "4"}}" #ADMIN_CPU_MAX
+              memory: "{{.Values.StudentFlask.limits.memory | default "12Gi"}}" 
+              cpu: "{{.Values.StudentFlask.limits.cpu | default "4"}}" 
             requests:
-              memory: "{{.Values.StudentFlask.requests.memory | default "6Gi"}}" #ADMIN_MEM_MIN
-              cpu: "{{.Values.StudentFlask.requests.cpu | default "2"}}" #ADMIN_CPU_MIN
+              memory: "{{.Values.StudentFlask.requests.memory | default "6Gi"}}" 
+              cpu: "{{.Values.StudentFlask.requests.cpu | default "2"}}" 
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst

@@ -6,6 +6,8 @@ To store the data you need to apply a persistant volume claim. This is done by c
 
 export NAMESPACE="engr131spring"
 
+export NAMESPACE="m3learning"
+
 
 ```bash
 echo "Creating the volume..." &&
@@ -32,14 +34,14 @@ You can apply the database by running the following command:
 echo "Creating the postgres deployment and service..." &&
 kubectl apply -f database/k8/postgres-deployment.yml -n $NAMESPACE &&
 kubectl apply -f database/k8/postgres-service.yml -n $NAMESPACE &&
-POD_NAME=$(kubectl get pod -l service=postgres -o jsonpath="{.items[0].metadata.name}")
+POD_NAME=$(kubectl get pod -l service=postgres -o jsonpath="{.items[0].metadata.name}") -n $NAMESPACE
 ```
 
 #### To check the status of the database
 
 ```bash
 kubectl get pods
-kubectl exec $POD_NAME --stdin --tty -- psql -U sample -d grades
+kubectl exec $POD_NAME --stdin --tty -- psql -U sample -d grades -n #NAMESPACE
 ```
 
 ## Creating the Database Schema

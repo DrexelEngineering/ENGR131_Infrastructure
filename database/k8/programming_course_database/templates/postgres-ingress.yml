@@ -18,4 +18,4 @@ spec:
                   number: {{.Values.Postgres.port.number | default "5432"}}
   tls:
     - hosts:
-        - {{.Values.Postgres.host | default "engr131-pg.nrp-nautilus.io"}} 
+        - {{.Values.Postgres.host | default "engr131-pg-dev.nrp-nautilus.io"}} 

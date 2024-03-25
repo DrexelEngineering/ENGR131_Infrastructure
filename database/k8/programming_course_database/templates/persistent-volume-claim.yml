@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc-{{.Values.Course.name | default "class"}} # POSTGRES_PVC
+  labels:
+    type: local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: '{{.Values.Postgres.storage | default "5Gi"}}'
+  storageClassName: '{{.Values.Postgres.storageClassName | default "rook-ceph-block"}}'
