@@ -18,7 +18,7 @@ There is a template docker file located in the `custom_env` folder. You can use 
 
 ### Step 3: Build the Docker Image
 
-## Build Docker Image
+#### Build Docker Image
 
 ```bash
 . ./secrets.sh &&
@@ -29,9 +29,7 @@ docker tag $dockeruser/$envcontainer:$envtag $dockeruser/$envcontainer:latest &&
 docker push $dockeruser/$envcontainer:latest
 ```
 
-
-
-# This will push to the gitlab registry
+#### Alternative build for NRP 
 
 ```bash
 . ./secrets.sh &&
