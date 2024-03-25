@@ -7,7 +7,10 @@ hub:
     JupyterHub:
       admin_access: true
       admin_users: 
-${ADMIN_LIST}
+        - "jca92@drexel.edu
+        - "jca318@lehigh.edu
+        - "jca318@globusid.org
+        - "jca318
       authenticator_class: "oauthenticator.globus.GlobusOAuthenticator" # Corrected class name
     GlobusOAuthenticator:
       client_id: ${OAUTH_CLIENT_ID} # Your Globus client ID

@@ -55,3 +55,6 @@ helm install pgweb ectobit/pgweb --namespace engr131 --values ./database/k8/pgwe
 helm uninstall pgweb --namespace engr131
 
 kubectl create -f database/k8/pgwebv2.yml -n engr131
+
+# Use envsubst, sed, or similar to replace placeholders in your template
+envsubst < ./jupyterhub/values.template.yaml > values.generated.yaml
