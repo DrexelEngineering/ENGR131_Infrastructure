@@ -71,11 +71,11 @@ StudentFlask:
     cpu: "2"
   image: "jagar2/student_flask_server:latest"
 
-data:
-  user: "c2FtcGxl" # base64 for "sample"
-  password: "cGxlYXNlY2hhbmdlbWU=" # base64 for "pleasechange"
-  student_pass: "Y2FwdHVyZQ==" # base64 for "capture"
-  admin_pass: "ZGlmZnVzZXI=" # base64 for "diffuser"
+# data:
+#   user: "c2FtcGxl" # base64 for "sample"
+#   password: "cGxlYXNlY2hhbmdlbWU=" # base64 for "pleasechange"
+#   student_pass: "Y2FwdHVyZQ==" # base64 for "capture"
+#   admin_pass: "ZGlmZnVzZXI=" # base64 for "diffuser"
 
 PGWeb:
   port: 8081

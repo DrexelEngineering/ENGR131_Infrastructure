@@ -1,0 +1,158 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: caf037c98dfdbcc26fffdf67a37ba34e06d267600cbf1ae93203239681922b41
+    cni.projectcalico.org/podIP: ""
+    cni.projectcalico.org/podIPs: ""
+  creationTimestamp: "2024-03-22T17:12:56Z"
+  labels:
+    run: pgweb
+  name: pgweb
+  namespace: engr131
+  resourceVersion: "7384823057"
+  uid: cea540be-e299-4818-b9ae-d9815e077d87
+spec:
+  activeDeadlineSeconds: 21600
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: nvidia.com/gpu.product
+                operator: NotIn
+                values:
+                  - NVIDIA-TITAN-RTX
+                  - NVIDIA-RTX-A5000
+                  - Quadro-RTX-6000
+                  - Tesla-V100-SXM2-32GB
+                  - NVIDIA-A40
+                  - NVIDIA-RTX-A6000
+                  - Quadro-RTX-8000
+                  - NVIDIA-A100-PCIE-40GB
+                  - NVIDIA-A100-SXM4-80GB
+                  - NVIDIA-A100-80GB-PCIe
+                  - NVIDIA-GH200-480GB
+  containers:
+    - args:
+        - --bind=0.0.0.0
+        - --listen=8081
+        - --auth-user=engr131
+        - --auth-pass=CappsAgar
+        - --no-idle-timeout
+      env:
+        - name: PGWEB
+          value: pgweb
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: none
+      image: sosedoff/pgweb
+      imagePullPolicy: Always
+      name: pgweb
+      ports:
+        - containerPort: 8081
+          protocol: TCP
+      resources:
+        limits:
+          cpu: "16"
+          memory: 16Gi
+        requests:
+          cpu: "8"
+          memory: 8Gi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: kube-api-access-nlrw8
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: nrp-c14.nysernet.org
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: PreferNoSchedule
+      key: nvidia.com/gpu
+      operator: Exists
+  volumes:
+    - name: kube-api-access-nlrw8
+      projected:
+        defaultMode: 420
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              items:
+                - key: ca.crt
+                  path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+                - fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+                  path: namespace
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2024-03-22T17:12:56Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2024-03-22T23:12:56Z"
+      reason: PodFailed
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2024-03-22T23:12:56Z"
+      reason: PodFailed
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2024-03-22T17:12:56Z"
+      status: "True"
+      type: PodScheduled
+  containerStatuses:
+    - containerID: containerd://d2129d1a31753b90e1cf5baeb6bd759e04934b785734fc4f1e6bd6d050282759
+      image: docker.io/sosedoff/pgweb:latest
+      imageID: docker.io/sosedoff/pgweb@sha256:18226b304e976592d87d5fc578c5da292d59b5c9e77f960cb5638a488ea3dbcb
+      lastState: {}
+      name: pgweb
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://d2129d1a31753b90e1cf5baeb6bd759e04934b785734fc4f1e6bd6d050282759
+          exitCode: 0
+          finishedAt: "2024-03-22T23:12:57Z"
+          reason: Completed
+          startedAt: "2024-03-22T17:13:16Z"
+  hostIP: 199.109.80.20
+  message: Pod was active on the node longer than the specified deadline
+  phase: Failed
+  podIP: 10.244.145.226
+  podIPs:
+    - ip: 10.244.145.226
+    - ip: fdf0:17b3:c3ec:1f79:10::a47b
+  qosClass: Burstable
+  reason: DeadlineExceeded
+  startTime: "2024-03-22T17:12:56Z"
+
+
+  kubectl apply -f ./admin-flask-deployment.yml -n m3learning &&
+
