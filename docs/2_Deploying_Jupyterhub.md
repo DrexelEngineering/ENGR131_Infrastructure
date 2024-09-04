@@ -43,9 +43,34 @@ Globus auth allows you to use trusted authentication and authorization to access
     ```
 
 
+##### TRY 9/4/2024
+
+helm repo add bitnami https://charts.bitnami.com/bitnami --namespace=engr131spring
+helm install jupyterhub-postgresql bitnami/postgresql --set postgresqlPassword=password --namespace=engr131spring
+
+POSTGRES_PASSWORD=$(kubectl get secret --namespace engr131spring jupyterhub-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+POSTGRES_HOST=$(kubectl get svc --namespace engr131spring jupyterhub-postgresql -o jsonpath="{.spec.clusterIP}")
+
+
+
+export envtag="2.0.0"
+export course="engr131"
+export semester="spring2024"
+export dockeruser="jagar2"
+export nrpgitlabuser="jagar2"
+export envcontainer="${course}jlab"
+export HOSTNAME="nrp-nautilus.io"
+export OAUTH_CLIENT_SECRET="VsH4/qz0Vm+4pENMFP3j6EeyHgi4s1RPQNR7Mrp4Pxg="
+export OAUTH_CALLBACK_URL="https://${course}-${semester}.${HOSTNAME}/hub/oauth_callback"
+export OAUTH_CLIENT_ID="e34feab7-6074-4b9d-8122-b75ae6757e4d"
+export ADMIN_USERS="jca92@drexel.edu,jca318@lehigh.edu,jca318@globusid.org,jca318"
+
 
 helm repo add engr131-spring2024 https://jupyterhub.github.io/helm-chart/ && helm repo update &&
 helm upgrade --cleanup-on-fail --install jhub engr131-spring2024/jupyterhub --namespace engr131spring --version=2.0.0 --values ./values.yaml
+
+helm upgrade --cleanup-on-fail --install jhub jupyterhub/jupyterhub --namespace engr131spring --version=3.3.7 --values default.yaml
+
 
 helm uninstall jhub --namespace engr131spring
 

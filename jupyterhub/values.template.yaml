@@ -6,8 +6,7 @@ hub:
   config:
     JupyterHub:
       admin_access: true
-      admin_users: 
-${ADMIN_LIST}
+      admin_users: ${ADMIN_LIST}
       authenticator_class: "oauthenticator.globus.GlobusOAuthenticator" # Corrected class name
     GlobusOAuthenticator:
       client_id: ${OAUTH_CLIENT_ID} # Your Globus client ID

@@ -1,17 +1,34 @@
 hub:
   config:
+    CILogonOAuthenticator:
+      client_id: cilogon:/client_id/37fc855bffdeb424d5eac406c9de554a
+      client_secret: Hoii2pOlVra6D7Ggy-gGu8mo7rlLA-6lwQ8QMjxojmagVTtkmF5ns3dBk0had7qOobJVCmE4AXijHcqwYWrF6w
+      oauth_callback_url: https://engr131.nrp-nautilus.io/hub/oauth_callback
+      admin_users:
+      - jca92@drexel.edu
+      # IDP Lookup: https://cilogon.org/idplist/
+      allowed_idps:
+        https://shib.unl.edu/idp/shibboleth:
+          allowed_domains:
+          - drexel.edu
+          username_derivation:
+            username_claim: email
     JupyterHub:
       admin_access: true
-      admin_users:
-        - "jca92@drexel.edu" # Add your email here
-        - "jca318@lehigh.edu"
-        - "jca318@globusid.org"
-        - "jca318"
-      authenticator_class: "oauthenticator.globus.GlobusOAuthenticator" # Corrected class name
-    GlobusOAuthenticator:
-      client_id: "e34feab7-6074-4b9d-8122-b75ae6757e4d" # Your Globus client ID
-      client_secret: "VsH4/qz0Vm+4pENMFP3j6EeyHgi4s1RPQNR7Mrp4Pxg=" # Your Globus client secret
-      oauth_callback_url: "https://engr131-spring2024.nrp-nautilus.io/hub/oauth_callback" # Ensure this matches the callback URL registered in Globus
+      admin_users: ["jca92@drexel.edu"]
+      authenticator_class: cilogon
+    # JupyterHub:
+    #   admin_access: true
+    #   admin_users:
+    #     - "jca92@drexel.edu" # Add your email here
+    #     - "jca318@lehigh.edu"
+    #     - "jca318@globusid.org"
+    #     - "jca318"
+    #   authenticator_class: "oauthenticator.globus.GlobusOAuthenticator" # Corrected class name
+    # GlobusOAuthenticator:
+    #   client_id: "e34feab7-6074-4b9d-8122-b75ae6757e4d" # Your Globus client ID
+    #   client_secret: "VsH4/qz0Vm+4pENMFP3j6EeyHgi4s1RPQNR7Mrp4Pxg=" # Your Globus client secret
+    #   oauth_callback_url: "https://engr131-spring2024.nrp-nautilus.io/hub/oauth_callback" # Ensure this matches the callback URL registered in Globus
   service:
     type: ClusterIP
     annotations: {}
@@ -26,7 +43,7 @@ hub:
       accessModes:
         - ReadWriteOnce
       storage: 1Gi
-      storageClassName: rook-ceph-east
+      storageClassName: rook-cephfs-east
   resources:
     limits:
       cpu: 3
@@ -53,12 +70,12 @@ singleuser:
     securityContext:
       fsGroupChangePolicy: "OnRootMismatch"
       fsGroup: 100
-  # extraNodeAffinity:
-  #   # required:
-  #   #   - matchExpressions:
-  #   #       # - key: "topology.kubernetes.io/region"
-  #   #       #   operator: "In"
-  #   #       #   values: ["us-east"]
+  extraNodeAffinity:
+    required:
+      - matchExpressions:
+          - key: "topology.kubernetes.io/region"
+            operator: "In"
+            values: ["us-east"]
   #   #       - key: "nautilus.io/linstor" # Add this line
   #   #         operator: "Exists"
   cloudMetadata:
@@ -73,7 +90,7 @@ singleuser:
     capacity: 0.5Gi
     homeMountPath: /home/jovyan
     dynamic:
-      storageClass: rook-ceph-east
+      storageClass: rook-cephfs-east
       pvcNameTemplate: claim-{username}{servername}
       volumeNameTemplate: volume-{username}{servername}
       storageAccessModes: [ReadWriteOnce]
@@ -95,7 +112,7 @@ singleuser:
   profileList:
     - display_name: ENGR131
       kubespawner_override:
-        image_spec: jagar2/engr_131_jupyter_hub:1.0.6
+        image_spec: jagar2/engr131jlab:latest
 
 scheduling:
   podPriority:
@@ -117,11 +134,11 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: haproxy
-  hosts: ["engr131-spring2024.nrp-nautilus.io"]
+  hosts: ["engr131.nrp-nautilus.io"]
   pathSuffix: ""
   tls:
     - hosts:
-        - engr131-spring2024.nrp-nautilus.io
+        - engr131.nrp-nautilus.io
 
 cull:
   enabled: true

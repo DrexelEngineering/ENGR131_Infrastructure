@@ -1,16 +1,28 @@
 #!/bin/bash
 
+# tag for the Juhub environment
 export envtag="2.0.0"
+
+# Course name
 export course="engr131"
+
+# Semester
 export semester="spring2024"
+
+# Usernames
 export dockeruser="jagar2"
 export nrpgitlabuser="jagar2"
+
+# JupyterHub
 export envcontainer="${course}jlab"
 export HOSTNAME="nrp-nautilus.io"
 export OAUTH_CLIENT_SECRET="VsH4/qz0Vm+4pENMFP3j6EeyHgi4s1RPQNR7Mrp4Pxg="
 export OAUTH_CALLBACK_URL="https://${course}-${semester}.${HOSTNAME}/hub/oauth_callback"
 export OAUTH_CLIENT_ID="e34feab7-6074-4b9d-8122-b75ae6757e4d"
 export ADMIN_USERS="jca92@drexel.edu,jca318@lehigh.edu,jca318@globusid.org,jca318"
+
+export STORAGE_CLASS="rook-cephfs-east"
+
 # export DB_PVC_SIZE="25Gi"
 # export POSTGRES_PORT=5432
 # export POSTGRES_NAME="postgres-$course-spring2024"
