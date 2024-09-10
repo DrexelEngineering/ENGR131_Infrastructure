@@ -1,6 +1,6 @@
-from psycopg2 import sql
-import psycopg2
 import time
+
+from psycopg2 import sql
 
 
 def upsert_json(json_data, table_name, unique_columns):

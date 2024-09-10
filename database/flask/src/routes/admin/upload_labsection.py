@@ -1,12 +1,13 @@
 import os
 import sys
-from file_translators.student_reader import lab_csv_to_json
-from flask_login import login_required
-from util.sql_util import upsert_json
-from flask import Blueprint, request
 import time
-from login.login import admin_login
+
 import psycopg2  # Import psycopg2 for PostgreSQL database connection
+from file_translators.student_reader import lab_csv_to_json
+from flask import Blueprint, request
+from flask_login import login_required
+from login.login import admin_login
+from util.sql_util import upsert_json
 
 # Adjusting the system path to include the parent directory
 # This allows for the importation of modules from the parent directory

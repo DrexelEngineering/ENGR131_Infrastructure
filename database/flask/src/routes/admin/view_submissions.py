@@ -1,13 +1,9 @@
-from flask import Flask, request, jsonify
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import os
-import sys
-from flask import Blueprint
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 # Assuming the admin_login function establishes a connection to the database securely
 from login.login import admin_login
+from psycopg2.extras import RealDictCursor
 
 get_submissions = Blueprint("get_submissions", __name__)
 

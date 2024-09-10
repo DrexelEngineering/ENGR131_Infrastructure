@@ -1,8 +1,12 @@
 import os
 import sys
+import time
 
-import os
-import sys
+from file_translators.student_reader import student_csv_to_json
+from flask import Blueprint, request
+from flask_login import login_required
+from login.login import admin_login
+from util.sql_util import upsert_json
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)
@@ -10,13 +14,6 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from file_translators.student_reader import student_csv_to_json
-from flask_login import login_required
-from util.sql_util import upsert_json
-from flask import Blueprint, request
-import time
-from login.login import admin_login
-import psycopg2  # Import psycopg2 for PostgreSQL database connection
 
 upload_students = Blueprint("upload_students", __name__)
 

@@ -1,14 +1,12 @@
 import os
 import sys
-import re
+from datetime import datetime, timedelta, timezone
+
 from file_translators.assignment_reader import assignment_JSON
-from flask_login import login_required
-from util.sql_util import upsert_json, commit_sql
 from flask import Blueprint, request
-import time
+from flask_login import login_required
 from login.login import admin_login
-from datetime import datetime, timezone, timedelta
-from ...util.string_util import is_string_number_combo, extract_string_number
+from util.sql_util import commit_sql, upsert_json
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)

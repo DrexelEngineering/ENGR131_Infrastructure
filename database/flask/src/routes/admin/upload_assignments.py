@@ -1,12 +1,13 @@
 import os
 import sys
-from ...util.string_util import is_string_number_combo, extract_string_number
+
 from file_translators.assignment_reader import assignment_JSON
-from flask_login import login_required
-from util.sql_util import upsert_json, commit_sql
 from flask import Blueprint, request
-import time
+from flask_login import login_required
 from login.login import admin_login
+from util.sql_util import commit_sql, upsert_json
+
+from ...util.string_util import extract_string_number, is_string_number_combo
 
 # Adjusting the system path to include the parent directory for relative imports
 current_dir = os.path.dirname(__file__)
