@@ -35,9 +35,11 @@ app.register_blueprint(upload_lab_section)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# TODO: Put this in a secret
 # Set a secret key for security purposes
-app.secret_key = "fBLwqnX5PCJVQtDcicLzUPYu7uU"
+try:
+    app.secret_key = os.environ["ADMIN_SECRET_KEY"]
+except KeyError:
+    print("ADMIN_SECRET_KEY environment variable not found")
 
 # Set the session to be permanent and expire after 1 hour
 app.permanent_session_lifetime = timedelta(hours=1)

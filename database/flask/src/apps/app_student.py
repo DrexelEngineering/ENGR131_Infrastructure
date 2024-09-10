@@ -26,7 +26,13 @@ app.register_blueprint(live_scorer)
 # Builds the login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
-app.secret_key = "fBLwqnX5PCJVQtDcicLzUPYu7uU"  # Set a secret key for security purposes
+
+# Set a secret key for security purposes
+try:
+    app.secret_key = os.environ["STUDENT_SECRET_KEY"]
+except KeyError:
+    print("STUDENT_SECRET_KEY environment variable not found")
+
 # Set the session to be permanent and expire after 1 hour
 app.permanent_session_lifetime = timedelta(hours=5)
 
