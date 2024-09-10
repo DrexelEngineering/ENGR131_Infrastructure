@@ -1,6 +1,12 @@
+import argparse
 import os
 import sys
-import argparse
+from datetime import timedelta
+
+from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
+from routes.students.upload_score import live_scorer, upload_score
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)
@@ -8,16 +14,6 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from flask import session
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-import psycopg2
-import psycopg2.extras
-from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import timedelta
-
-from routes.students.upload_score import upload_score, live_scorer
-from login.login import student_login
 
 app = Flask(__name__)
 app.register_blueprint(upload_score)

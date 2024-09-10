@@ -1,6 +1,8 @@
 import os
 import sys
+
 import psycopg2
+
 from .encryption import Encryption
 
 # Adding the parent directory to the sys.path allows for importing modules from the parent directory.

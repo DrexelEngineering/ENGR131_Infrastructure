@@ -1,5 +1,5 @@
-import json
 import argparse
+import json
 
 
 def assignment_JSON(file_path):

@@ -1,19 +1,16 @@
+import argparse
 import os
 import sys
-import argparse
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from flask import session
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-import psycopg2
-import psycopg2.extras
-from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import timedelta
-from routes.admin.upload_students import upload_students
-from routes.admin.upload_labsection import upload_lab_section
-from routes.admin.upload_assignments import upload_assignment
-from routes.admin.upload_score import upload_score
-from login.login import admin_login
 
+from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
+from login.login import admin_login
+from routes.admin.upload_assignments import upload_assignment
+from routes.admin.upload_labsection import upload_lab_section
+from routes.admin.upload_score import upload_score
+from routes.admin.upload_students import upload_students
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)

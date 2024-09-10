@@ -1,7 +1,13 @@
 import os
-import sys
 import re
-from datetime import datetime, timezone, timedelta
+import sys
+from datetime import datetime, timedelta, timezone
+
+from file_translators.assignment_reader import assignment_JSON
+from flask import Blueprint, request
+from flask_login import login_required
+from login.login import student_login
+from util.sql_util import commit_sql, insert_json
 
 # Get the directory of your current script
 current_dir = os.path.dirname(__file__)
@@ -9,13 +15,6 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from file_translators.assignment_reader import assignment_JSON
-from flask_login import login_required
-from util.sql_util import insert_json, commit_sql
-from flask import Blueprint, request
-import time
-from login.login import student_login
-import drexel_jupyter_logger
 
 key = "7mPZKa3gJZn4ng0WJ5TsUmuQC2RK9XBAwTzrTEjbyB0="
 
