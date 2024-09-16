@@ -23,9 +23,9 @@ export ADMIN_USERS="jca92@drexel.edu,jca318@lehigh.edu,jca318@globusid.org,jca31
 
 export STORAGE_CLASS="rook-cephfs-east"
 
-export CLIENT_ID = "cilogon:/client_id/37fc855bffdeb424d5eac406c9de554a"
-export CLIENT_SECRET = "Hoii2pOlVra6D7Ggy-gGu8mo7rlLA-6lwQ8QMjxojmagVTtkmF5ns3dBk0had7qOobJVCmE4AXijHcqwYWrF6w"
-export OAUTH_CALLBACK_URL = "https://engr131.nrp-nautilus.io/hub/oauth_callback"
+export CLIENT_ID="cilogon:/client_id/37fc855bffdeb424d5eac406c9de554a"
+export CLIENT_SECRET="Hoii2pOlVra6D7Ggy-gGu8mo7rlLA-6lwQ8QMjxojmagVTtkmF5ns3dBk0had7qOobJVCmE4AXijHcqwYWrF6w"
+export OAUTH_CALLBACK_URL="https://engr131.nrp-nautilus.io/hub/oauth_callback"
 
 # export DB_PVC_SIZE="25Gi"
 # export POSTGRES_PORT=5432
@@ -39,7 +39,6 @@ export OAUTH_CALLBACK_URL = "https://engr131.nrp-nautilus.io/hub/oauth_callback"
 # export STORAGE_CLASS="rook-ceph-block"
 # export POSTGRES_PVC_SIZE="25Gi"
 
-
 # export ADMIN_SERVER_NAME="admin-$course-$semester-flask"
 # export ADMIN_SERVER_REPLICAS=1
 # export ADMIN_SERVER_CONTAINER="$dockeruser/admin_flask_server:2.0.5"
@@ -50,7 +49,6 @@ export OAUTH_CALLBACK_URL = "https://engr131.nrp-nautilus.io/hub/oauth_callback"
 # export ADMIN_FLASK_SERVICE_NAME="$ADMIN_SERVER_NAME-service"
 # export ADMIN_FLASK_SERVICE_PORT=5100
 # export ADMIN_FLASK_HOSTNAME="${course}-${semester}-admin-grader.${HOSTNAME}"
-
 
 # export STUDENT_SERVER_NAME="student-$course-$semester-flask"
 # export STUDENT_SERVER_REPLICAS=1
