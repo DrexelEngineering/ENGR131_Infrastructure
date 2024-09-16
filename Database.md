@@ -8,7 +8,6 @@ export NAMESPACE="engr131spring"
 
 export NAMESPACE="m3learning"
 
-
 ```bash
 echo "Creating the volume..." &&
 
@@ -50,10 +49,9 @@ You can apply the database schema by running the SQL from the files to apply the
 
 TODO: Add the SQL to apply the tables
 
-
 ## Start the Flask Servers
 
-We will start 3 Flask servers. One for students, and one for the admins. 
+We will start 3 Flask servers. One for students, and one for the admins.
 
 ```bash
 kubectl apply -f database/k8/student-flask-deployment.yml -n $NAMESPACE &&
@@ -85,7 +83,6 @@ curl -b cookie.txt -X POST -F "file=@/home/ferroelectric/K8_autograder_database/
 
 ## Add student lab sections to the database
 
-``` bash
+```bash
 curl -b cookie.txt -X POST -F "file=@/home/ferroelectric/K8_autograder_database/.test_files/test/ENGR131-070.csv" -F "password=diffuser" -F "lab_section=070" -F "day_of_week=f" -F "start_time=15:00:00" https://engr131-admin-grader.nrp-nautilus.io/upload_lab_section
 ```
-

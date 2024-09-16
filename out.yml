@@ -152,7 +152,4 @@ status:
   qosClass: Burstable
   reason: DeadlineExceeded
   startTime: "2024-03-22T17:12:56Z"
-
-
-  kubectl apply -f ./admin-flask-deployment.yml -n m3learning &&
-
+# kubectl apply -f ./admin-flask-deployment.yml -n m3learning &&
