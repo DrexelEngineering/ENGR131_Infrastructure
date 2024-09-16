@@ -1,12 +1,12 @@
 #!/bin/sh
 
-cd /usr/src/apps
+cd /usr/src/apps || exit 1
 
 echo "Waiting for postgres..."
 
 # this is a hack to wait for postgres to start
 while ! nc -z postgres 5432; do
-  sleep 0.1
+	sleep 0.1
 done
 
 echo "PostgreSQL started"
