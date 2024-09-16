@@ -2,8 +2,6 @@
 
 ## Build Docker Image
 
-
-
 ```bash
 envtag="2.0.0"
 tagname=$envtag
@@ -12,8 +10,6 @@ docker push $dockeruser/$envcontainer:$envtag &&
 docker tag $dockeruser/$envcontainer:$envtag $dockeruser/$envcontainer:latest &&
 docker push $dockeruser/$envcontainer:latest
 ```
-
-
 
 # This will push to the gitlab registry
 

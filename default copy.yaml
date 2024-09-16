@@ -5,12 +5,12 @@ hub:
       client_secret: Hoii2pOlVra6D7Ggy-gGu8mo7rlLA-6lwQ8QMjxojmagVTtkmF5ns3dBk0had7qOobJVCmE4AXijHcqwYWrF6w
       oauth_callback_url: https://engr131.nrp-nautilus.io/hub/oauth_callback
       admin_users:
-      - jca92@drexel.edu
+        - jca92@drexel.edu
       # IDP Lookup: https://cilogon.org/idplist/
       allowed_idps:
         https://shib.drexel.edu/idp/shibboleth:
           allowed_domains:
-          - drexel.edu
+            - drexel.edu
           username_derivation:
             username_claim: email
     JupyterHub:
@@ -44,7 +44,7 @@ hub:
   nodeSelector:
     topology.kubernetes.io/region: "us-east"
 proxy:
-  secretToken: 'secret_token'
+  secretToken: "secret_token"
   service:
     type: ClusterIP
   chp:
@@ -64,14 +64,14 @@ singleuser:
     GRANT_SUDO: "yes"
   extraPodConfig:
     securityContext:
-        fsGroupChangePolicy: "OnRootMismatch"
-        fsGroup: 100
+      fsGroupChangePolicy: "OnRootMismatch"
+      fsGroup: 100
   extraNodeAffinity:
     required:
       - matchExpressions:
-        - 'key': 'topology.kubernetes.io/region'
-          'operator': 'In'
-          'values': ["us-east"]
+          - key: "topology.kubernetes.io/region"
+            operator: "In"
+            values: ["us-east"]
   cloudMetadata:
     blockWithIptables: false
   networkPolicy:
@@ -104,52 +104,52 @@ singleuser:
   cmd: null
   defaultUrl: "/lab"
   profileList:
-  - display_name: Scipy
-    kubespawner_override:
-      image_spec: quay.io/jupyter/scipy-notebook:2024-04-22
-    default: True
-  - display_name: R
-    kubespawner_override:
-      image_spec: quay.io/jupyter/r-notebook:2024-04-22
-  - display_name: Julia
-    kubespawner_override:
-      image_spec: quay.io/jupyter/julia-notebook:2024-04-22
-  - display_name: Tensorflow
-    kubespawner_override:
-      image_spec: quay.io/jupyter/tensorflow-notebook:cuda-2024-04-22
-  - display_name: Pytorch
-    kubespawner_override:
-      image_spec: quay.io/jupyter/pytorch-notebook:cuda12-2024-04-22
-  - display_name: Datascience (scipy, Julia, R)
-    kubespawner_override:
-      image_spec: quay.io/jupyter/datascience-notebook:2024-04-22
-  - display_name: Pyspark
-    kubespawner_override:
-      image_spec: quay.io/jupyter/pyspark-notebook:2024-04-22
-  - display_name: All Spark
-    kubespawner_override:
-      image_spec: quay.io/jupyter/all-spark-notebook:2024-04-22
-  - display_name: B-Data python scipy
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/python/scipy:3
-  - display_name: B-Data Julia
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/julia/base:1
-  - display_name: B-Data R
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/r/base:4
-  - display_name: B-Data R tidyverse
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/r/tidyverse:4
-  - display_name: B-Data R verse
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/r/verse:4
-  - display_name: B-Data R geospatial
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/r/geospatial:4
-  - display_name: B-Data R qgisprocess
-    kubespawner_override:
-      image_spec: glcr.b-data.ch/jupyterlab/cuda/r/qgisprocess:4
+    - display_name: Scipy
+      kubespawner_override:
+        image_spec: quay.io/jupyter/scipy-notebook:2024-04-22
+      default: True
+    - display_name: R
+      kubespawner_override:
+        image_spec: quay.io/jupyter/r-notebook:2024-04-22
+    - display_name: Julia
+      kubespawner_override:
+        image_spec: quay.io/jupyter/julia-notebook:2024-04-22
+    - display_name: Tensorflow
+      kubespawner_override:
+        image_spec: quay.io/jupyter/tensorflow-notebook:cuda-2024-04-22
+    - display_name: Pytorch
+      kubespawner_override:
+        image_spec: quay.io/jupyter/pytorch-notebook:cuda12-2024-04-22
+    - display_name: Datascience (scipy, Julia, R)
+      kubespawner_override:
+        image_spec: quay.io/jupyter/datascience-notebook:2024-04-22
+    - display_name: Pyspark
+      kubespawner_override:
+        image_spec: quay.io/jupyter/pyspark-notebook:2024-04-22
+    - display_name: All Spark
+      kubespawner_override:
+        image_spec: quay.io/jupyter/all-spark-notebook:2024-04-22
+    - display_name: B-Data python scipy
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/python/scipy:3
+    - display_name: B-Data Julia
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/julia/base:1
+    - display_name: B-Data R
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/r/base:4
+    - display_name: B-Data R tidyverse
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/r/tidyverse:4
+    - display_name: B-Data R verse
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/r/verse:4
+    - display_name: B-Data R geospatial
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/r/geospatial:4
+    - display_name: B-Data R qgisprocess
+      kubespawner_override:
+        image_spec: glcr.b-data.ch/jupyterlab/cuda/r/qgisprocess:4
 
 scheduling:
   userScheduler:
@@ -168,10 +168,10 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: haproxy
   hosts: ["engr131.nrp-nautilus.io"]
-  pathSuffix: ''
+  pathSuffix: ""
   tls:
     - hosts:
-      - engr131.nrp-nautilus.io
+        - engr131.nrp-nautilus.io
 
 cull:
   enabled: true

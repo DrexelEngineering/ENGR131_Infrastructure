@@ -1,9 +1,9 @@
 apiVersion: v2
 name: Programming-Course-Database
-description: 
+description:
 type: application
 version: 0.1.0
 appVersion: "1.0.0"
 maintainers:
-- email: jca92@drexel.edu
-  name: programming-course-database
+  - email: jca92@drexel.edu
+    name: programming-course-database

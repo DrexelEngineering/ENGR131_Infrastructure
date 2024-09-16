@@ -2,7 +2,7 @@
 
 ## Introduction
 
-It is helpful to have a custom Jupyter environment for your students to access. This can be easily done by creating a container. 
+It is helpful to have a custom Jupyter environment for your students to access. This can be easily done by creating a container.
 
 ## Setting up the Environment
 
@@ -29,13 +29,13 @@ docker tag $dockeruser/$envcontainer:$envtag $dockeruser/$envcontainer:latest &&
 docker push $dockeruser/$envcontainer:latest
 ```
 
-#### Alternative build for NRP 
+#### Alternative build for NRP
 
 ```bash
 . ./secrets.sh &&
 tagname=$envtag &&
-docker build -t gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:$envtag ./custom_env && 
-docker push gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:$envtag && 
-docker tag gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/ $envcontainer:$envtag gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:latest && 
+docker build -t gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:$envtag ./custom_env &&
+docker push gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:$envtag &&
+docker tag gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/ $envcontainer:$envtag gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:latest &&
 docker push gitlab-registry.nrp-nautilus.io/$nrpgitlabuser/$envcontainer:latest
 ```

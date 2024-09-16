@@ -1,24 +1,24 @@
 {
-    "tests": [
-        {
-            "name": "Public Tests",
-            "visibility": "visible",
-            "output": "q0-Your-Name results: All test cases passed!\n\nq1-Make Your Branded Shirt results: All test cases passed!",
-            "status": "passed"
-        },
-        {
-            "name": "q0-Your-Name",
-            "score": 5,
-            "max_score": 5,
-            "visibility": "hidden",
-            "output": "q0-Your-Name results: All test cases passed!\nq0-Your-Name - 1 message: Color random correctly implemented.\nq0-Your-Name - 2 message: Information properly extracted."
-        },
-        {
-            "name": "q1-Make Your Branded Shirt",
-            "score": 10,
-            "max_score": 10,
-            "visibility": "hidden",
-            "output": "q1-Make Your Branded Shirt results: All test cases passed!\nq1-Make Your Branded Shirt - 1 message: Color random correctly implemented.\nq1-Make Your Branded Shirt - 2 message: rgb_to_hex random correctly implemented.\nq1-Make Your Branded Shirt - 3 message: multicolor_image random correctly implemented.\nq1-Make Your Branded Shirt - 4 message: text_phantom random correctly implemented.\nq1-Make Your Branded Shirt - 5 message: text_phantom random correctly implemented."
-        }
-    ]
+  "tests": [
+    {
+      "name": "Public Tests",
+      "visibility": "visible",
+      "output": "q0-Your-Name results: All test cases passed!\n\nq1-Make Your Branded Shirt results: All test cases passed!",
+      "status": "passed"
+    },
+    {
+      "name": "q0-Your-Name",
+      "score": 5,
+      "max_score": 5,
+      "visibility": "hidden",
+      "output": "q0-Your-Name results: All test cases passed!\nq0-Your-Name - 1 message: Color random correctly implemented.\nq0-Your-Name - 2 message: Information properly extracted."
+    },
+    {
+      "name": "q1-Make Your Branded Shirt",
+      "score": 10,
+      "max_score": 10,
+      "visibility": "hidden",
+      "output": "q1-Make Your Branded Shirt results: All test cases passed!\nq1-Make Your Branded Shirt - 1 message: Color random correctly implemented.\nq1-Make Your Branded Shirt - 2 message: rgb_to_hex random correctly implemented.\nq1-Make Your Branded Shirt - 3 message: multicolor_image random correctly implemented.\nq1-Make Your Branded Shirt - 4 message: text_phantom random correctly implemented.\nq1-Make Your Branded Shirt - 5 message: text_phantom random correctly implemented."
+    }
+  ]
 }
