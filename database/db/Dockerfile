@@ -5,4 +5,3 @@ FROM postgres:13-alpine
 # this is a special directory that will execute any SQL scripts inside it
 # it will also store the files there.
 ADD create_db.sql /docker-entrypoint-initdb.d/
-
