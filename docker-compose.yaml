@@ -12,13 +12,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pendant-sheet-unmixable
-    resources:
-      limits:
-        cpus: "${POSTGRES_CPU_MAX}"
-        memory: "${POSTGRES_MEM_MAX}"
-      reservations:
-        cpus: "${POSTGRES_CPU_MIN}"
-        memory: "${POSTGRES_MEM_MIN}"
     volumes:
       - ${POSTGRES_PVC}:/var/lib/postgresql/data
 
@@ -33,13 +26,6 @@ services:
       - DATABASE_PASSWORD=diffuser
     depends_on:
       - postgres
-    resources:
-      limits:
-        cpus: "${ADMIN_CPU_MAX}"
-        memory: "${ADMIN_MEM_MAX}"
-      reservations:
-        cpus: "${ADMIN_CPU_MIN}"
-        memory: "${ADMIN_MEM_MIN}"
 
   student_server:
     build:
@@ -52,10 +38,3 @@ services:
       - DATABASE_PASSWORD=capture
     depends_on:
       - postgres
-    resources:
-      limits:
-        cpus: "${STUDENT_CPU_MAX}"
-        memory: "${STUDENT_MEM_MAX}"
-      reservations:
-        cpus: "${STUDENT_CPU_MIN}"
-        memory: "${STUDENT_MEM_MIN}"
