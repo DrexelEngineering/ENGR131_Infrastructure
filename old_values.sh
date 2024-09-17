@@ -1,3 +1,9 @@
+#! /usr/bin/env bash
+
+course="foo"
+semester="bar"
+dockeruser="baz"
+
 export STUDENT_SERVER_NAME="student-$course-$semester-flask"
 export STUDENT_SERVER_REPLICAS=2
 export STUDENT_SERVER_CONTAINER="$dockeruser/student_flask_server:2.0.5"
