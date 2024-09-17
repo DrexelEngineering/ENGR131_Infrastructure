@@ -6,7 +6,7 @@ metadata:
   name: student-ingress
 spec:
   rules:
-    - host: {{.Values.StudentFlask.host | default "engr131-student-grader.nrp-nautilus.io"}} 
+    - host: '{{ .Values.StudentFlask.host | default "engr131-student-grader.nrp-nautilus.io" }}'
       http:
         paths:
           - path: /
@@ -15,35 +15,35 @@ spec:
               service:
                 name: student-flask-{{.Values.Course.name | default "class"}}-service
                 port:
-                  number: {{.Values.StudentFlask.port.number | default "5200"}}
+                  number: '{{ .Values.StudentFlask.port.number | default "5200" }}'
           - path: /logout
             pathType: Prefix
             backend:
               service:
                 name: student-flask-{{.Values.Course.name | default "class"}}-service
                 port:
-                  number: {{.Values.StudentFlask.port.number | default "5200"}}
+                  number: '{{ .Values.StudentFlask.port.number | default "5200" }}'
           - path: /login
             pathType: Prefix
             backend:
               service:
                 name: student-flask-{{.Values.Course.name | default "class"}}-service
                 port:
-                  number: {{.Values.StudentFlask.port.number | default "5200"}}
+                  number: '{{ .Values.StudentFlask.port.number | default "5200" }}'
           - path: /upload_score
             pathType: Prefix
             backend:
               service:
                 name: student-flask-{{.Values.Course.name | default "class"}}-service
                 port:
-                  number: {{.Values.StudentFlask.port.number | default "5200"}}
+                  number: '{{ .Values.StudentFlask.port.number | default "5200" }}'
           - path: /live_scorer
             pathType: Prefix
             backend:
               service:
                 name: student-flask-{{.Values.Course.name | default "class"}}-service
                 port:
-                  number: {{.Values.StudentFlask.port.number | default "5200"}}
+                  number: '{{ .Values.StudentFlask.port.number | default "5200" }}'
   tls:
     - hosts:
-        - {{.Values.StudentFlask.host | default "engr131-student-grader-dev.nrp-nautilus.io"}} 
+        - '{{ .Values.StudentFlask.host | default "engr131-student-grader-dev.nrp-nautilus.io" }}'

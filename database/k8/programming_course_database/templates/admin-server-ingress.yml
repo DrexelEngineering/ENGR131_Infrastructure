@@ -6,7 +6,7 @@ metadata:
   name: admin-flask-{{.Values.Course.name | default "class"}}-ingress
 spec:
   rules:
-    - host: {{.Values.AdminFlask.host | default "engr131-admin-grader.nrp-nautilus.io"}} 
+    - host: '{{ .Values.AdminFlask.host | default "engr131-admin-grader.nrp-nautilus.io" }}'
       http:
         paths:
           - path: /
@@ -15,42 +15,42 @@ spec:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}' #ADMIN_FLASK_SERVICE_PORT
           - path: /logout
             pathType: Prefix
             backend:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}' #ADMIN_FLASK_SERVICE_PORT
           - path: /login
             pathType: Prefix
             backend:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}}
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}'
           - path: /upload_assignment
             pathType: Prefix
             backend:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}' #ADMIN_FLASK_SERVICE_PORT
           - path: /upload_score
             pathType: Prefix
             backend:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}' #ADMIN_FLASK_SERVICE_PORT
           - path: /upload_students
             pathType: Prefix
             backend:
               service:
                 name: admin-flask-{{.Values.Course.name | default "class"}}-flask-service #ADMIN_FLASK_SERVICE_NAME
                 port:
-                  number: {{.Values.AdminFlask.port.number | default "5100"}} #ADMIN_FLASK_SERVICE_PORT
+                  number: '{{ .Values.AdminFlask.port.number | default "5100" }}' #ADMIN_FLASK_SERVICE_PORT
   tls:
     - hosts:
-        - {{.Values.AdminFlask.host | default "engr131-admin-grader-dev.nrp-nautilus.io"}}  #ADMIN_FLASK_HOSTNAME
+        - '{{ .Values.AdminFlask.host | default "engr131-admin-grader-dev.nrp-nautilus.io" }}' #ADMIN_FLASK_HOSTNAME

@@ -9,5 +9,5 @@ spec:
     service: postgres
   type: ClusterIP
   ports:
-    - port: {{.Values.Postgres.port.number | default "5432"}} #POSTGRES_PORT
-      targetPort: {{.Values.Postgres.port.number | default "5432"}} # The port the container is listening on
+    - port: '{{ .Values.Postgres.port.number | default "5432" }}' #POSTGRES_PORT
+      targetPort: '{{ .Values.Postgres.port.number | default "5432" }}' # The port the container is listening on
