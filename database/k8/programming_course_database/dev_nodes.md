@@ -15,6 +15,6 @@ cr upload -o DrexelEngineering -r ENGR131_Infrastructure -p .deploy -t $CR_TOKEN
 ## Installing the Helm Chart
 
 ```bash
-helm install my-release  https://github.com/DrexelEngineering/ENGR131_Infrastructure/releases/download/Programming-Course-Database-0.1.0/Programming-Course-Database-0.1.0.tgz -n
+helm install my-release https://github.com/DrexelEngineering/ENGR131_Infrastructure/releases/download/Programming-Course-Database-0.1.0/Programming-Course-Database-0.1.0.tgz -n
  m3learning
 ```
