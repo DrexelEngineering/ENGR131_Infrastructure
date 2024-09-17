@@ -1,2 +1,2 @@
-templates/
+**/templates/*.html
 *.template.yaml

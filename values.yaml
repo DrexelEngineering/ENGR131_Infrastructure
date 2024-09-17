@@ -1,9 +1,8 @@
 hub:
   config:
     CILogonOAuthenticator:
-      client_id: { { required "CLIENT_ID is required" (env "CLIENT_ID") } }
-      client_secret:
-        { { required "CLIENT_SECRET is required" (env "CLIENT_SECRET") } }
+      client_id: '{{ required "CLIENT_ID is required" (env "CLIENT_ID") }}'
+      client_secret: '{{ required "CLIENT_SECRET is required" (env "CLIENT_SECRET") }}'
       oauth_callback_url:
       admin_users:
         - jca92@drexel.edu

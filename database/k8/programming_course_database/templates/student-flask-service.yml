@@ -8,7 +8,6 @@ spec:
   selector:
     app: student-flask-{{.Values.Course.name | default "class"}}
   ports:
-    - port: {{.Values.StudentFlask.port.number | default "5200"}}
+    - port: '{{ .Values.StudentFlask.port.number | default "5200" }}'
       protocol: TCP
-      targetPort: {{.Values.StudentFlask.port.number | default "5200"}}
-
+      targetPort: '{{ .Values.StudentFlask.port.number | default "5200" }}'

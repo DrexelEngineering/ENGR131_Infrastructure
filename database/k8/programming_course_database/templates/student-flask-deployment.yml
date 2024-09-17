@@ -7,7 +7,7 @@ metadata:
   name: student-flask-{{.Values.Course.name | default "class"}}
 spec:
   progressDeadlineSeconds: 2147483647
-  replicas: {{.Values.StudentFlask.replicaCount | default "2"}}
+  replicas: '{{ .Values.StudentFlask.replicaCount | default "2" }}'
   selector:
     matchLabels:
       app: student-flask-{{.Values.Course.name | default "class"}}
@@ -38,16 +38,16 @@ spec:
                 secretKeyRef:
                   key: student_pass
                   name: postgres-credentials
-          image: {{.Values.StudentFlask.image | default "jagar2/student_flask_server:latest"}}
+          image: '{{ .Values.StudentFlask.image | default "jagar2/student_flask_server:latest" }}'
           imagePullPolicy: Always
           name: student-flask-{{.Values.Course.name | default "class"}}
           resources:
             limits:
-              memory: "{{.Values.StudentFlask.limits.memory | default "12Gi"}}" 
-              cpu: "{{.Values.StudentFlask.limits.cpu | default "4"}}" 
+              memory: '{{ .Values.StudentFlask.limits.memory | default "12Gi" }}'
+              cpu: '{{ .Values.StudentFlask.limits.cpu | default "4" }}'
             requests:
-              memory: "{{.Values.StudentFlask.requests.memory | default "6Gi"}}" 
-              cpu: "{{.Values.StudentFlask.requests.cpu | default "2"}}" 
+              memory: '{{ .Values.StudentFlask.requests.memory | default "6Gi" }}'
+              cpu: '{{ .Values.StudentFlask.requests.cpu | default "2" }}'
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
