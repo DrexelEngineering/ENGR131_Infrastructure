@@ -11,7 +11,7 @@ docker tag $dockeruser/$envcontainer:$envtag $dockeruser/$envcontainer:latest &&
 docker push $dockeruser/$envcontainer:latest
 ```
 
-# This will push to the gitlab registry
+## This will push to the gitlab registry
 
 ```bash
 tagname=$envtag
