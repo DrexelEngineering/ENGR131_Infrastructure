@@ -65,7 +65,7 @@ jupyter-book==0.15.1
 jupyter-cache==0.6.1
 jupyter-console==6.6.3
 jupyter-events==0.9.0
-jupyter-lsp==2.2.1
+jupyter-lsp==2.2.2
 jupyter_client==8.6.0
 jupyter_core==5.5.1
 jupyter_server==2.14.1
@@ -119,7 +119,7 @@ pandocfilters==1.5.0
 platformdirs>3.0.0
 parso==0.8.3
 pexpect==4.9.0
-Pillow==10.1.0
+Pillow==10.3.0
 pkginfo==1.9.6
 poetry==1.5.1
 poetry-core==1.6.1
