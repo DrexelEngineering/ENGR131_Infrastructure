@@ -1,10 +1,14 @@
 FROM jupyter/minimal-notebook:latest
-# Replace `latest` with an image tag from to ensure reproducible builds:
-# https://hub.docker.com/r/jupyter/minimal-notebook/tags/
-# Inspect the Dockerfile at:
-# https://github.com/jupyter/docker-stacks/tree/HEAD/minimal-notebook/Dockerfile
 
+# Switch to root user to install system packages
+USER root
+
+# Update and install packages
+RUN apt-get update && apt-get install -y gcc && rm -rf /var/lib/apt/lists/*
+
+# Switch back to non-root `jovyan` user
+USER $NB_USER
+
+# Copy and install Python dependencies
 COPY ./requirements.txt /tmp/requirements.txt
-
-# install additional package...
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
